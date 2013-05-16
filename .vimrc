@@ -24,6 +24,7 @@ Bundle 'alfredodeza/pytest.vim.git'
 Bundle 'reinh/vim-makegreen'
 Bundle 'vim-scripts/The-NERD-tree.git'
 Bundle 'sontek/rope-vim.git'
+Bundle 'nixternal/taskwarrior-vim.git'
 syntax on
 filetype plugin indent on
 let g:NERDTreeDirArrows=0
