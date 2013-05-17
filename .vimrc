@@ -24,6 +24,7 @@ Bundle 'reinh/vim-makegreen'
 Bundle 'vim-scripts/The-NERD-tree.git'
 Bundle 'sontek/rope-vim.git'
 Bundle 'nixternal/taskwarrior-vim.git'
+Bundle 'ScrollColors'
 syntax on
 filetype plugin indent on
 let g:NERDTreeDirArrows=0
@@ -36,6 +37,7 @@ map <c-l> <c-w>l
 map <c-h> <c-w>h
 
 " Add the virtualenv's site-packages to vim path
+if version >= 730
 py << EOF
 import os.path
 import sys
@@ -46,6 +48,7 @@ if 'VIRTUAL_ENV' in os.environ:
     activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
     execfile(activate_this, dict(__file__=activate_this))
 EOF
+endif
 
 " Use spaces instead of tabs
 set expandtab
@@ -131,8 +134,13 @@ set background=dark
 colorscheme oceanblack256
 "colorscheme 256-jungle
 "colorscheme zenburn
+if version < 730
+colorscheme CodeFactoryv3
+endif
 highlight ColorColumn ctermbg=Red guibg=Red
+if version >= 730
 set colorcolumn=80
+endif
 set nohidden
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Helper functions
