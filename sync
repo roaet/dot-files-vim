@@ -1,6 +1,6 @@
 #!/bin/bash
 rsync -rv --exclude-from 'exclude-list.txt' .??* ~
-rsync -rv --exclude-from 'exclude-list.txt' README*  ~
+rsync -rv --exclude-from 'exclude-list.txt' *  ~
 if [ ! -d "~/.vimswap" ]; then
     mkdir ~/.vimswap
 fi

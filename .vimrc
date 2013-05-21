@@ -24,6 +24,7 @@ Bundle 'reinh/vim-makegreen'
 Bundle 'vim-scripts/The-NERD-tree.git'
 Bundle 'sontek/rope-vim.git'
 Bundle 'nixternal/taskwarrior-vim.git'
+Bundle 'ScrollColors'
 syntax on
 filetype plugin indent on
 let g:NERDTreeDirArrows=0
@@ -133,6 +134,9 @@ set background=dark
 colorscheme oceanblack256
 "colorscheme 256-jungle
 "colorscheme zenburn
+if version < 730
+colorscheme CodeFactoryv3
+endif
 highlight ColorColumn ctermbg=Red guibg=Red
 if version >= 730
     set colorcolumn=80
