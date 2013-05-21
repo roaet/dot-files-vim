@@ -36,6 +36,7 @@ map <c-l> <c-w>l
 map <c-h> <c-w>h
 
 " Add the virtualenv's site-packages to vim path
+if version >= 730
 py << EOF
 import os.path
 import sys
@@ -46,6 +47,7 @@ if 'VIRTUAL_ENV' in os.environ:
     activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
     execfile(activate_this, dict(__file__=activate_this))
 EOF
+endif
 
 " Use spaces instead of tabs
 set expandtab
@@ -132,7 +134,9 @@ colorscheme oceanblack256
 "colorscheme 256-jungle
 "colorscheme zenburn
 highlight ColorColumn ctermbg=Red guibg=Red
-set colorcolumn=80
+if version >= 730
+    set colorcolumn=80
+endif
 set nohidden
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Helper functions
