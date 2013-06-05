@@ -37,7 +37,7 @@ map <c-l> <c-w>l
 map <c-h> <c-w>h
 
 " Add the virtualenv's site-packages to vim path
-if version >= 730
+if version >= 703
 py << EOF
 import os.path
 import sys
@@ -134,11 +134,11 @@ set background=dark
 colorscheme oceanblack256
 "colorscheme 256-jungle
 "colorscheme zenburn
-if version < 730
+if version < 703
 colorscheme CodeFactoryv3
 endif
-highlight ColorColumn ctermbg=Red guibg=Red
-if version >= 730
+highlight ColorColumn ctermbg=Blue guibg=Blue
+if version >= 703
     set colorcolumn=80
 endif
 set nohidden
