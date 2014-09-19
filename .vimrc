@@ -118,7 +118,7 @@ set mat=2
 set noerrorbells
 set novisualbell
 set t_vb=
-set tm=50
+set timeoutlen=1000 ttimeoutlen=50
 
 " Show numbers
 set number
