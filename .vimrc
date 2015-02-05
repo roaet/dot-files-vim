@@ -5,11 +5,9 @@ set rtp+=~/.vim/bundle/vundle
 call vundle#rc()
 
 Bundle 'gmarick/vundle'
-
 Bundle 'scrooloose/syntastic.git'
 Bundle 'flazz/vim-colorschemes.git'
 Bundle 'tpope/vim-fugitive.git'
-Bundle 'tpope/vim-surround.git'
 Bundle 'tpope/vim-git.git'
 Bundle 'ervandew/supertab.git'
 Bundle 'wincent/Command-T.git'
@@ -21,12 +19,12 @@ Bundle 'vim-scripts/pep8.git'
 Bundle 'alfredodeza/pytest.vim.git'
 Bundle 'reinh/vim-makegreen'
 Bundle 'rodjek/vim-puppet.git'
-Bundle 'sontek/rope-vim.git'
+Bundle 'surround.vim'
 Bundle 'ScrollColors'
+Bundle 'jaxbot/semantic-highlight.vim'
+Bundle 'jewes/Conque-Shell'
 syntax on
 filetype plugin indent on
-let g:NERDTreeDirArrows=0
-
 
 " Some new configurations
 map <c-j> <c-w>j
@@ -63,11 +61,51 @@ set ai "Auto indent
 set si "Smart indent
 set wrap "Wrap lines
 
+let g:semanticTermColors = [28,1,2,3,4,5,6,7,25,9,10,34,12,13,14,15,16,125,124,19]
+let g:semanticTermColors = [28,1,2,3,4,5,6,7,25,9,10,34,12,13,14,15,16,125,124,19]
+let g:semanticTermColors = [1,2,3,4,5,6,7,9,10,12,13,14,15,16]
+
 " Always show the status line
 set laststatus=2
 
+" Set following to show "<CAPS>" in the status line when "Caps Lock" is on.
+let b:keymap_name = "CAPS"
+" Show b:keymap_name in status line.
+:set statusline^=%k
+
 " Format the status line
+" original
 set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l
+" put paste info
+set statusline=%#error#%{SL('HasPaste')}%*
+" set color to 'search'
+set statusline+=%#todo#
+" if a help file or not
+set statusline+=%h
+" if modified or not
+set statusline+=%m
+" set color to 'error'
+set statusline+=%#error#
+" read-only or not
+set statusline+=%r
+" reset color
+set statusline+=%*
+" FILETYPE
+"set statusline+=%y\ 
+" column number 
+set statusline+=\ %c,
+" line/total lines
+set statusline+=%l/%L
+" percent of file
+set statusline+=\ %P
+" Move to the right align
+set statusline+=%=
+" put up to 50 characters of filename and path
+set statusline+=\ %30.30{fnamemodify(bufname('%'),':p:h')}/
+set statusline+=%#statusbold#
+set statusline+=%t
+" space at end to make it easier to read
+set statusline+=\     
 
 " Set 7 lines to the cursor - when moving vertically using j/k
 set so=7
@@ -115,10 +153,12 @@ set showmatch
 set mat=2
 
 " No annoying sound on errors
+" ERROR SOMEWHERE IN HERE
 set noerrorbells
 set novisualbell
 set t_vb=
 set timeoutlen=1000 ttimeoutlen=50
+" ERROR SOMEWHERE IN HERE
 
 " Show numbers
 set number
@@ -136,6 +176,7 @@ if version < 703
 colorscheme CodeFactoryv3
 endif
 highlight ColorColumn ctermbg=Blue guibg=Blue
+highlight statusbold term=bold,reverse ctermfg=5 ctermbg=118 gui=bold,reverse
 if version >= 703
     set colorcolumn=80
 endif
@@ -170,14 +211,27 @@ function! VisualSelection(direction) range
     let @" = l:saved_reg
 endfunction
 
-
 " Returns true if paste mode is enabled
 function! HasPaste()
     if &paste
-        return 'PASTE MODE  '
+        return 'PASTE MODE'
     en
     return ''
 endfunction
+
+if has("eval")
+    function! SL(function)
+        if exists('*'.a:function)
+            return call(a:function,[])
+        else
+            return ''
+        endif
+    endfunction
+
+    function! GetFullFilePath(arg)
+        return fnamemodify(arg, ":p:h")
+    endfunction
+endif
 
 " Don't close window, when deleting a buffer
 command! Bclose call <SID>BufcloseCloseIt()
@@ -199,6 +253,8 @@ function! <SID>BufcloseCloseIt()
      execute("bdelete! ".l:currentBufNum)
    endif
 endfunction
+
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => End helper functions
