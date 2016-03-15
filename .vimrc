@@ -4,7 +4,7 @@ filetype off
 set rtp+=~/.vim/bundle/vundle
 call vundle#rc()
 
-Bundle 'gmarick/vundle'
+" Bundle 'gmarick/vundle'
 Bundle 'scrooloose/syntastic.git'
 Bundle 'flazz/vim-colorschemes.git'
 Bundle 'tpope/vim-fugitive.git'
@@ -23,6 +23,7 @@ Bundle 'surround.vim'
 Bundle 'ScrollColors'
 Bundle 'jaxbot/semantic-highlight.vim'
 Bundle 'jewes/Conque-Shell'
+Bundle 'jwalton512/vim-blade'
 syntax on
 filetype plugin indent on
 
